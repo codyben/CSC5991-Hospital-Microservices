@@ -38,17 +38,20 @@ jobs:
           format: json # either json, csv or newline
       - name: "Display delta"
         run: echo '::echo::on' && echo "::set-output name=containers::$(echo '${{ steps.get_changed.outputs.changed }}' | gawk '{ gsub(/"/,"\\\"") } 1')"
+        id: display-delta
+    outputs:
+      container-changes: ${{ steps.display-delta.outputs.containers }}
 
   debug-print:
     runs-on: ubuntu-latest
     needs: setup
     steps:
       - name: "Print"
-        run: echo ${{ needs.setup.outputs.containers }}
+        run: echo ${{ needs.setup.outputs.container-changes }}
   container-matrix:
     strategy:
       matrix:
-        container: ${{fromJSON(needs.setup.outputs.containers)}}
+        container: ${{fromJSON(needs.setup.outputs.container-changes)}}
     needs: setup
     runs-on: ubuntu-latest
     steps:
