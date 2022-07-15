@@ -52,6 +52,8 @@ jobs:
     strategy:
       matrix:
         container: ${{fromJSON(needs.setup.outputs.container-changes)}}
+        exclude:
+          - container: .github
     needs: setup
     runs-on: ubuntu-latest
     steps:
