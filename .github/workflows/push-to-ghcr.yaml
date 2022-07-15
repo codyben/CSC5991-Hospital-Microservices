@@ -41,7 +41,7 @@ jobs:
 
   debug-print:
     runs-on: ubuntu-latest
-     needs: setup
+    needs: setup
     steps:
       - name: "Print"
         run: echo ${{ needs.setup.outputs.containers }}
