@@ -13,7 +13,7 @@ env:
   REGISTRY: ghcr.io
 
 jobs:
-  get-container-delta:
+  setup:
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -37,12 +37,13 @@ jobs:
           foldersOnly: true # to only include folders in the output
           format: json # either json, csv or newline
       - name: "Display delta"
-        run: echo ${{ steps.get_changed.outputs.changed }}
+        run: echo "::set-output name=services::$(echo ${{ steps.get_changed.outputs.changed }})"
 
   container-matrix:
     strategy:
       matrix:
-        container: ${{ steps.get_changed.outputs.changed }}
+        container: ${{fromJSON(needs.setup.outputs.containers)}}
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
