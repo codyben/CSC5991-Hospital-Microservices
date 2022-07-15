@@ -40,6 +40,7 @@ jobs:
         run: echo '::echo::on' && echo "::set-output name=containers::$(echo '${{ steps.get_changed.outputs.changed }}' | gawk '{ gsub(/"/,"\\\"") } 1')"
 
   debug-print:
+    runs-on: alpine-latest
     steps:
       - name: "Print"
         run: echo ${{ needs.setup.outputs.containers }}
