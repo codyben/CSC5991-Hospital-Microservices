@@ -41,6 +41,7 @@ jobs:
 
   debug-print:
     runs-on: ubuntu-latest
+     needs: setup
     steps:
       - name: "Print"
         run: echo ${{ needs.setup.outputs.containers }}
@@ -48,6 +49,7 @@ jobs:
     strategy:
       matrix:
         container: ${{fromJSON(needs.setup.outputs.containers)}}
+    needs: setup
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
