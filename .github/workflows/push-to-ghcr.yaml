@@ -37,7 +37,7 @@ jobs:
           foldersOnly: true # to only include folders in the output
           format: json # either json, csv or newline
       - name: "Display delta"
-        run: echo "::set-output name=services::${{ steps.get_changed.outputs.changed }}"
+        run: echo "::set-output name=containers::${{ steps.get_changed.outputs.changed }}"
 
   container-matrix:
     strategy:
