@@ -50,7 +50,7 @@ jobs:
   #     - name: "Print"
   #       run: echo ${{ needs.setup.outputs.container-changes }}
   container-matrix:
-    if: needs.setup.outputs.container-should-run
+    if: ${{ needs.setup.outputs.container-should-run }}
     strategy:
       matrix:
         container: ${{fromJSON(needs.setup.outputs.container-changes)}}
