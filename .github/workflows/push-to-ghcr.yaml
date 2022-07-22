@@ -41,6 +41,7 @@ jobs:
         id: display-delta
     outputs:
       container-changes: ${{ steps.display-delta.outputs.containers }}
+      container-should-run: steps.display-delta.outputs.containers.length > 1
 
   # debug-print:
   #   runs-on: ubuntu-latest
@@ -49,6 +50,7 @@ jobs:
   #     - name: "Print"
   #       run: echo ${{ needs.setup.outputs.container-changes }}
   container-matrix:
+    if: needs.setup.outputs.container-should-run
     strategy:
       matrix:
         container: ${{fromJSON(needs.setup.outputs.container-changes)}}
