@@ -41,7 +41,7 @@ jobs:
         id: display-delta
     outputs:
       container-changes: ${{ steps.display-delta.outputs.containers }}
-      container-should-run: steps.display-delta.outputs.containers.length > 1
+      container-should-run: ${{ steps.display-delta.outputs.containers.length > 1 }}
 
   # debug-print:
   #   runs-on: ubuntu-latest
