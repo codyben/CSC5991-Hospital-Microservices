@@ -1,4 +1,4 @@
-class RoomModel:
+class MedicineModel:
     def __init__(self, name:str, med_name:str, dosage:int):
         self.name = name
         self.medicine_name = med_name
