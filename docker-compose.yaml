@@ -1,0 +1,56 @@
+version: "3.9"
+services:
+  hospital-reader-gateway:
+    image: ghcr.io/codyben/csc5991-hospital-microservices/reader-gateway:develop-cody
+    ports:
+      - '80:80'
+    hostname: hospital-reader-gateway.local
+    stop_signal: SIGINT
+    networks:
+      - gateway-network
+      - reader-network
+
+  hospital-db:
+    image: ghcr.io/codyben/csc5991-hospital-microservices/hospital-database:main
+    ports:
+      - '3306:3306'
+    depends_on:
+      - hospital-reader-gateway
+    hostname: hospital-database.local
+    networks:
+      - database-network
+
+  patient-reader:
+    image: ghcr.io/codyben/csc5991-hospital-microservices/patient-reader:develop-cody
+    ports:
+      - '80:80'
+    depends_on:
+      - hospital-reader-gateway
+      - hospital-db
+    stop_signal: SIGINT
+    hostname: hospital-patient-reader.local
+    networks:
+      - reader-network
+      - database-network
+
+
+networks:
+  reader-network:
+    name: reader-net
+    driver: overlay
+    internal: true
+    attachable: true
+  gateway-network:
+    name: gateway-net
+    driver: overlay
+    internal: true
+    attachable: true
+  database-network:
+    name: db-net
+    driver: overlay
+    internal: true
+    attachable: true
+  general-network:
+    name: gen-net
+    driver: bridge
+    attachable: true
