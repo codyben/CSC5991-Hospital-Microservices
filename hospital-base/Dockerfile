@@ -4,6 +4,14 @@ WORKDIR /app
 
 ADD HospitalExceptions.py .
 ADD PatientModel.py .
+ADD MedicineModel.py .
+ADD AmbulanceModel.py .
+ADD BillingModel.py .
+ADD CleaningStaffModel.py .
+ADD ExamModel.py .
+ADD RoomModel.py .
+ADD DoctorModel.py .
+
 
 ENV CONTAINER TRUE
 
