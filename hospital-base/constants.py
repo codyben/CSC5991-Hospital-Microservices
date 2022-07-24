@@ -1,0 +1,1 @@
+GATEWAY_FQDN = "hospital-reader-gateway.local"
