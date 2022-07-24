@@ -64,7 +64,7 @@ jobs:
         uses: andstor/file-existence-action@v1
         with:
           files: "./${{ matrix.container }}/Dockerfile"
-            -
+          
       - name: Set up Docker Buildx
         if: steps.check_files.outputs.files_exists == 'true'
         uses: docker/setup-buildx-action@v2
@@ -83,7 +83,7 @@ jobs:
         uses: docker/metadata-action@98669ae865ea3cffbcbaa878cf57c20bbf1c6c38
         with:
           images: ${{ env.REGISTRY }}/${{ github.repository }}/${{ matrix.container }}
-          
+
       - name: Build and push Docker image
         if: steps.check_files.outputs.files_exists == 'true'
         uses: docker/build-push-action@v3
