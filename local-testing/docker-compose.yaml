@@ -1,0 +1,163 @@
+version: "3.9"
+services:
+  hospital-reader-gateway:
+    build: ../reader-gateway
+    ports:
+      - '80:80'
+    hostname: hospital-reader-gateway.local
+    stop_signal: SIGINT
+    networks:
+      - external-network
+      - reader-network
+
+  hospital-db:
+    build: ../hospital-database
+    ports:
+      - '3306:3306'
+    depends_on:
+      - hospital-reader-gateway
+    hostname: hospital-database.local
+    networks:
+      - database-network
+
+  patient-reader:
+    build: ../patient-reader
+    ports:
+      - '80:80'
+    depends_on:
+      - hospital-reader-gateway
+      - hospital-db
+    stop_signal: SIGINT
+    hostname: hospital-patient-reader.local
+    networks:
+      - reader-network
+      - database-network
+
+  doctor-reader:
+    build: ../doctor-reader
+    ports:
+      - '80:80'
+    depends_on:
+      - hospital-reader-gateway
+      - hospital-db
+    stop_signal: SIGINT
+    hostname: hospital-doctor-reader.local
+    networks:
+      - reader-network
+      - database-network
+
+  exam-reader:
+    build: ../exam-reader
+    ports:
+      - '80:80'
+    depends_on:
+      - hospital-reader-gateway
+      - hospital-db
+    stop_signal: SIGINT
+    hostname: hospital-exam-reader.local
+    networks:
+      - reader-network
+      - database-network
+
+  cleaning-staff-reader:
+    build: ../cleaning-staff-reader
+    ports:
+      - '80:80'
+    depends_on:
+      - hospital-reader-gateway
+      - hospital-db
+    stop_signal: SIGINT
+    hostname: hospital-cleaning-reader.local
+    networks:
+      - reader-network
+      - database-network
+
+  billing-reader:
+    build: ../billing-reader
+    ports:
+      - '80:80'
+    depends_on:
+      - hospital-reader-gateway
+      - hospital-db
+    stop_signal: SIGINT
+    hostname: hospital-billing-reader.local
+    networks:
+      - reader-network
+      - database-network
+    
+  ambulance-reader:
+    build: ../ambulance-reader
+    ports:
+      - '80:80'
+    depends_on:
+      - hospital-reader-gateway
+      - hospital-db
+    stop_signal: SIGINT
+    hostname: hospital-ambulance-reader.local
+    networks:
+      - reader-network
+      - database-network
+  
+  medicine-reader:
+    build: ../medicine-reader
+    ports:
+      - '80:80'
+    depends_on:
+      - hospital-reader-gateway
+      - hospital-db
+    stop_signal: SIGINT
+    hostname: hospital-medicine-reader.local
+    networks:
+      - reader-network
+      - database-network
+
+  room-reader:
+    build: ../room-reader
+    ports:
+      - '80:80'
+    depends_on:
+      - hospital-reader-gateway
+      - hospital-db
+    stop_signal: SIGINT
+    hostname: hospital-room-reader.local
+    networks:
+      - reader-network
+      - database-network
+
+  patient-microservice:
+    build: ../patient-microservice
+    ports:
+      - '5001:80'
+    depends_on:
+      - hospital-reader-gateway
+    stop_signal: SIGINT
+    hostname: hospital-patient-microservice.local
+    networks:
+      - external-network
+
+  doctor-microservice:
+    build: ../doctor-microservice
+    ports:
+      - '5002:80'
+    depends_on:
+      - hospital-reader-gateway
+    stop_signal: SIGINT
+    hostname: hospital-doctor-microservice.local
+    networks:
+      - external-network
+
+networks:
+  reader-network:
+    name: reader-net
+    driver: overlay
+    internal: true
+    attachable: true
+  external-network:
+    name: ext-net
+    driver: bridge
+    attachable: true
+  database-network:
+    name: db-net
+    driver: overlay
+    internal: true
+    attachable: true
