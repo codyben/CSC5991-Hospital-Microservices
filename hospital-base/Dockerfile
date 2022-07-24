@@ -3,6 +3,7 @@ FROM python:3
 WORKDIR /app
 
 ADD HospitalExceptions.py .
+ADD PatientModel.py .
 
 ENV CONTAINER TRUE
 
