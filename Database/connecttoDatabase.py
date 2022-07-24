@@ -4,12 +4,12 @@ db = mysql.connector.connect(
     host="localhost",
     user="root",
     passwd="root",
-    database=" HospitalServices"
+    database=" HospitalServices2"
 ) 
 
 mycursor = db.cursor()
 
-mycursor.execute("CREATE TABLE Patient_info(PATIENTname VARCHAR(50), PATIENTage int UNSIGNED, phoneNumber bigint UNSIGNED, patientID int PRIMARY KEY AUTO_INCREMENT)")
+mycursor.execute("CREATE TABLE Patient_info(PATIENTname VARCHAR(50), PATIENTage int UNSIGNED, phoneNumber bigint UNSIGNED, patientID int UNSIGNED)")
 
 mycursor.execute("CREATE TABLE Patient_Roominfo(PATIENTname VARCHAR(50), RoomNumber int UNSIGNED, Department VARCHAR(50))")
 
@@ -27,4 +27,5 @@ mycursor.execute("CREATE TABLE cleaningStaff(StaffName VARCHAR(50), StaffDaysAva
 
 mycursor.execute("CREATE TABLE BillingInfo(PATIENTname VARCHAR(50), MoneyOwed int UNSIGNED, MoneyDueBy VARCHAR(50))")
 
+mycursor.execute("CREATE TABLE Docter(DOCname VARCHAR(50), DOCphone bigint UNSIGNED, DOCfield VARCHAR(50),  DOCdaysPresent VARCHAR(50), DOCtimePresent VARCHAR(50) )")
 

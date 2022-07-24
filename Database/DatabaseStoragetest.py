@@ -4,11 +4,12 @@ db = mysql.connector.connect(
     host="localhost",
     user="root",
     passwd="root",
-    database=" HospitalServices"
+    database=" HospitalServices2"
 ) 
 
 mycursor = db.cursor()
 
-mycursor.execute("DESCRIBE Patient_info")
+mycursor.execute("SELECT * FROM Patient_info ")
+
 for x in mycursor:
-    print(x)
+    print (x)
