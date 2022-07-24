@@ -9,3 +9,4 @@ ENV CONTAINER TRUE
 RUN python -m pip install --upgrade pip
 RUN pip install wheel
 RUN pip install flask
+RUN pip install requests
