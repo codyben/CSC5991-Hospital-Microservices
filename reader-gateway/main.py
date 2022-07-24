@@ -42,7 +42,14 @@ def validate_service(service):
         SERVICES[name] = hostname
         SERVICE_ENDPOINTS[name] = service.get("endpoints", dict())
     return (
-        {"success": True},
+        {
+            "success": True,
+            "data": {
+                    "service": name,
+                    "hostname": SERVICES[name],
+                    "endpoints": SERVICE_ENDPOINTS[name]
+            }
+        },
         201,
     )
 

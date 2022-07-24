@@ -1,5 +1,6 @@
 FROM ghcr.io/codyben/csc5991-hospital-microservices/hospital-base:develop-cody
 
+ENV SERVICE_NAME patient-reader
 WORKDIR /app
 
 ADD main.py .
