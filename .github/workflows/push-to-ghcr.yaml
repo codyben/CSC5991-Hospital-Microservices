@@ -64,7 +64,7 @@ jobs:
         uses: andstor/file-existence-action@v1
         with:
           files: "./${{ matrix.container }}/Dockerfile"
-          
+
       - name: Set up Docker Buildx
         if: steps.check_files.outputs.files_exists == 'true'
         uses: docker/setup-buildx-action@v2
@@ -92,6 +92,6 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
-          cache-from: type=registry,ref=codyben/common:buildcache
-          cache-to: type=registry,ref=codyben/common:buildcache,mode=max
+          cache-from: type=registry,ref=codyben/${{ matrix.container }}:buildcache
+          cache-to: type=registry,ref=codyben/${{ matrix.container }}:buildcache,mode=max
 

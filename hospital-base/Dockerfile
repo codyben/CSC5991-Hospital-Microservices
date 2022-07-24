@@ -10,3 +10,4 @@ RUN python -m pip install --upgrade pip
 RUN pip install wheel
 RUN pip install flask
 RUN pip install requests
+RUN pip install mysql-connector-python
