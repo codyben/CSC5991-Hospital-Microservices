@@ -5,8 +5,10 @@ DB_FQDN = "hospital-database.local"
 # this for simplicity
 DB_PASSWORD = "root"
 DB_USER = "root"
+DB_NAME = "HospitalDatabase"
 MYSQL_CONNECT_OPTIONS = {
     "host": DB_FQDN,
-    "user": "root",
-    "passwd": "root",
+    "user": DB_USER,
+    "passwd": DB_PASSWORD,
+    "database": DB_NAME
 }
