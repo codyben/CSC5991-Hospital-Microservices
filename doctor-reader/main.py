@@ -59,7 +59,7 @@ def get_doctor_by_name(doctor_name:str):
     def query(cursor):
         cursor.execute("SELECT * FROM Docter WHERE DOCname = %s", (doctor_name,))
     result = database.transaction(query)
-    parsed = database.parse(result)
+    parsed = [database.parse(r) for r in result]
     if parsed:
         return {
             "success": True,

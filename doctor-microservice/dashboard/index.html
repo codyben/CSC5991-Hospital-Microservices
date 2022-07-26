@@ -4,30 +4,30 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="/dashboard/main.css" type="text/css">
-	<title>Current Patients</title>
+	<title>Current Doctors</title>
 </head>
 <body>
-	<h1>Current Patients</h1>
+	<h1>Current Doctors</h1>
 	<div class="stats">
 		<p id="total"></p>
 		<p id="generated"></p>
 		<p id="error">RESULTS OK</p>
 		<a href="#" onclick="loader()">REFRESH</a>
 	</div>
-	<div class="container" id="patients">
+	<div class="container" id="doctors">
 
 	</div>
 </body>
 <script>
 	"use strict";
-	function make_patient_row(patient) {
-		const {age, name, patient_id, phone} = patient;
-		return `<div class="patient">
-			<p class="patient-name">NAME: ${name}</p>
-			<p class="patient-age">AGE: ${age}</p>
-			<p class="patient-phone">PHONE: ${phone}</p>
-			<p class="patient-id">ID: ${patient_id}</p>
-			<a href="/api/${patient_id}">Integration Permlink</a>
+	function make_row(result) {
+		const {present, name, times, phone} = result;
+		return `<div class="doctor">
+			<p class="doctor-name">NAME: ${name}</p>
+			<p class="doctor-phone">PHONE: ${phone}</p>
+			<p class="doctor-avail">TIMES: ${times}</p>
+			<p class="doctor-days">DAYS: ${present}</p>
+			<a href="/api/${name}">Integration Permlink</a>
 			</div>`;
 	}
 
@@ -40,13 +40,13 @@
 			return response;
 		})
 		.then(response => response.data.data)
-		.then( (patients) => {
-			document.getElementById("patients").innerHTML = "";
-			patients.forEach( (patient) => {
-				document.getElementById("patients").innerHTML += make_patient_row(patient);
+		.then( (doctors) => {
+			document.getElementById("doctors").innerHTML = "";
+			doctors.forEach( (doctor) => {
+				document.getElementById("doctors").innerHTML += make_row(doctor);
 			})
 			document.getElementById("generated").innerHTML = new Date().toLocaleString();
-			document.getElementById("total").innerHTML = `${patients.length} results returned`;
+			document.getElementById("total").innerHTML = `${doctors.length} results returned`;
 		})
 	};
 

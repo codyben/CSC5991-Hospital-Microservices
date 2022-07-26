@@ -4,6 +4,7 @@ ENV SERVICE_NAME doctor-microservice
 WORKDIR /app
 
 ADD main.py .
+COPY dashboard/* ./dashboard/
 
 EXPOSE 80
 
