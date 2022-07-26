@@ -1,6 +1,7 @@
 import time
 import mysql.connector
-from MedicineModel import MedicineModel
+from ExamModel import ExamModel
+from constants import MYSQL_CONNECT_OPTIONS
 
 class Database:
     def __init__(self):
@@ -9,17 +10,14 @@ class Database:
         try:
             while retries > 0:
                 try:
-                    self.db = mysql.connector.connect(
-                        host="localhost",
-                        user="root",
-                        passwd="root",  
-                    )
+                    self.db = mysql.connector.connect(**MYSQL_CONNECT_OPTIONS)
+                    retries = -1
+                    print("DB has been initialized.")
                 except mysql.connector.errors.DatabaseError:
                     retries -= 1
                     time.sleep(2)
         except:
             print("Failed to init db")
-        print("DB has been initialized.")
     def transaction(self, query) -> tuple:
         cursor = self.db.cursor()
         try:
@@ -27,7 +25,7 @@ class Database:
         except:
             # raise an exception
             cursor.close()
-            return (False, ())
+            return ()
         results = cursor.fetchall()
         cursor.close()
         return results
@@ -35,9 +33,9 @@ class Database:
     def parse(self, row):
         if not row:
             return None
-        name, med_name, dosage = row
-        return MedicineModel(
+        name, issues, department = row
+        return ExamModel(
             name=name,
-            med_name=med_name,
-            dosage=dosage
+            issues=issues,
+            department=department
         ).serialize()

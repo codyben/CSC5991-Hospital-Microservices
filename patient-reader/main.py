@@ -57,9 +57,9 @@ def get_all_patients():
 @app.route('/patient/<patient_id>', methods=['GET'])
 def get_patient_by_id(patient_id:int):
     def query(cursor):
-        cursor.execute("SELECT * FROM Patient_info WHERE patientID = %d", (patient_id,))
+        cursor.execute("SELECT * FROM Patient_info WHERE patientID = %s", [patient_id])
     result = database.transaction(query)
-    parsed = database.parse(result)
+    parsed = [database.parse(r) for r in result]
     if parsed:
         return {
             "success": True,

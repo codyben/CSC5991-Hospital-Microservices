@@ -20,6 +20,13 @@ services:
     networks:
       - database-network
 
+  ephemeral-db-writer:
+    build: ../ephemeral-db-writer
+    depends_on:
+      - hospital-db
+    networks:
+      - database-network
+
   patient-reader:
     build: ../patient-reader
     ports:

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Current Patients</title>
+</head>
+<body>
+	<div class="container" id="patients">
+
+	</div>
+</body>
+<script>
+	function make_patient_row(patient) {
+		const {age, name, patient_id, phone} = patient;
+		return `<div class="patient">
+			<p class="patient-name">NAME: ${name}</p>
+			<p class="patient-age">AGE: ${age}</p>
+			<p class="patient-phone">PHONE: ${phone}</p>
+			<p class="patient-id">ID: ${patient_id}</p>
+			</div>`;
+	}
+	// Temporary as an example.
+	window.onload = () => {
+		fetch("/api").then( (r) => {
+			if(r.ok) return r.json()
+		}).then( (patients) => {
+			patients.data.data.forEach( (patient) => {
+				document.getElementById("patients").innerHTML += make_patient_row(patient);
+			})
+		})
+	}
+</script>
+</script>
+</html>

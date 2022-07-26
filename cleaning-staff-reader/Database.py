@@ -1,6 +1,7 @@
 import time
 import mysql.connector
 from CleaningStaffModel import CleaningStaffModel
+from constants import MYSQL_CONNECT_OPTIONS
 
 class Database:
     def __init__(self):
@@ -9,17 +10,14 @@ class Database:
         try:
             while retries > 0:
                 try:
-                    self.db = mysql.connector.connect(
-                        host="localhost",
-                        user="root",
-                        passwd="root",  
-                    )
+                    self.db = mysql.connector.connect(**MYSQL_CONNECT_OPTIONS)
+                    retries = -1
+                    print("DB has been initialized.")
                 except mysql.connector.errors.DatabaseError:
                     retries -= 1
                     time.sleep(2)
         except:
             print("Failed to init db")
-        print("DB has been initialized.")
     def transaction(self, query) -> tuple:
         cursor = self.db.cursor()
         try:
@@ -27,7 +25,7 @@ class Database:
         except:
             # raise an exception
             cursor.close()
-            return (False, ())
+            return ()
         results = cursor.fetchall()
         cursor.close()
         return results

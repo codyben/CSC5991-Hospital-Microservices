@@ -73,7 +73,8 @@ def find_services():
         output.append(
             {
                 "service": service,
-                "endpoints": SERVICE_ENDPOINTS.get("service")
+                "endpoints": SERVICE_ENDPOINTS.get(service),
+                "fqdn": SERVICES.get(service)
             }
         )
     return (
@@ -101,7 +102,8 @@ def find_service(service: str):
                 "success": True,
                 "data": {
                     "service": service,
-                    "endpoints": SERVICE_ENDPOINTS.get("service")
+                    "endpoints": SERVICE_ENDPOINTS.get(service),
+                    "fqdn": SERVICES.get(service)
                 }
             },
             200,

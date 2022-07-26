@@ -46,7 +46,7 @@ def notify_gateway():
 @app.route('/medicine', methods=['GET'])
 def get_all_medicine():
     def query(cursor):
-        cursor.execute("SELECT * FROM Patien_ExaminationResult")
+        cursor.execute("SELECT * FROM Patient_Medicines")
     result = database.transaction(query)
     return {
         "success": True,

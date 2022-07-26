@@ -54,7 +54,7 @@ def get_all_exams():
     }
 
 
-@app.route('/patient/<patient_name>', methods=['GET'])
+@app.route('/exam/<patient_name>', methods=['GET'])
 def get_exam_by_patient(patient_name:str):
     def query(cursor):
         cursor.execute("SELECT * FROM Patien_ExaminationResult WHERE PATIENTname = %s", (patient_name,))

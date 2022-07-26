@@ -57,7 +57,7 @@ def get_all_ambulances():
 @app.route('/ambulance/<amb_num>', methods=['GET'])
 def get_amulance_by_number(amb_num:int):
     def query(cursor):
-        cursor.execute("SELECT * FROM Ambulance WHERE AmbulanceNumber = %d", (amb_num,))
+        cursor.execute("SELECT * FROM Ambulance WHERE AmbulanceNumber = %s", (amb_num,))
     result = database.transaction(query)
     parsed = database.parse(result)
     if parsed:

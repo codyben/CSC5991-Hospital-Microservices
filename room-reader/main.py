@@ -74,7 +74,7 @@ def get_room_by_patient(patient_name:str):
 @app.route('/room/number/<room_number>', methods=['GET'])
 def get_room_by_number(room_number:int):
     def query(cursor):
-        cursor.execute("SELECT * FROM Patient_Roominfo WHERE RoomNumber = %d", (room_number,))
+        cursor.execute("SELECT * FROM Patient_Roominfo WHERE RoomNumber = %s", (room_number,))
     result = database.transaction(query)
     parsed = database.parse(result)
     if parsed:

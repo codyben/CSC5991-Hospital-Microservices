@@ -43,7 +43,7 @@ def notify_gateway():
 
 
 
-@app.route('/patient', methods=['GET'])
+@app.route('/doctor', methods=['GET'])
 def get_all_doctors():
     def query(cursor):
         cursor.execute("SELECT * FROM Docter")
@@ -54,7 +54,7 @@ def get_all_doctors():
     }
 
 
-@app.route('/patient/<doctor_name>', methods=['GET'])
+@app.route('/doctor/<doctor_name>', methods=['GET'])
 def get_doctor_by_name(doctor_name:str):
     def query(cursor):
         cursor.execute("SELECT * FROM Docter WHERE DOCname = %s", (doctor_name,))

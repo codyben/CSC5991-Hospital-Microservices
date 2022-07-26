@@ -1,3 +1,4 @@
+CREATE TABLE Docter(DOCname VARCHAR(50), DOCphone bigint UNSIGNED, DOCfield VARCHAR(50),  DOCdaysPresent VARCHAR(50), DOCtimePresent VARCHAR(50));
 CREATE TABLE Patient_info(PATIENTname VARCHAR(50), PATIENTage int UNSIGNED, phoneNumber bigint UNSIGNED, patientID int PRIMARY KEY AUTO_INCREMENT);
 CREATE TABLE Patient_Roominfo(PATIENTname VARCHAR(50), RoomNumber int UNSIGNED, Department VARCHAR(50));
 CREATE TABLE Nurse(NURSEname VARCHAR(50), NURSEphone bigint UNSIGNED, NURSEfield VARCHAR(50),  NURSEdaysPresent VARCHAR(50), NURSEtimePresent VARCHAR(50) );
