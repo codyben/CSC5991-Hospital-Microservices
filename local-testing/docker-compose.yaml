@@ -52,7 +52,18 @@ services:
     networks:
       - reader-network
       - database-network
-
+  nurse-reader:
+    build: ../nurse-reader
+    ports:
+      - '80:80'
+    depends_on:
+      - hospital-reader-gateway
+      - hospital-db
+    stop_signal: SIGINT
+    hostname: hospital-nurse-reader.local
+    networks:
+      - reader-network
+      - database-network
   exam-reader:
     build: ../exam-reader
     ports:
@@ -172,6 +183,52 @@ services:
       - hospital-reader-gateway
     stop_signal: SIGINT
     hostname: hospital-ambulance-microservice.local
+    networks:
+      - external-network
+
+  diagnostics-reader:
+    build: ../diagnostics-reader
+    ports:
+      - '80:80'
+    depends_on:
+      - hospital-reader-gateway
+      - hospital-db
+    stop_signal: SIGINT
+    hostname: hospital-diagnostics-reader.local
+    networks:
+      - reader-network
+      - database-network
+
+  diagnostics-microservice:
+    build: ../diagnostics-microservice
+    ports:
+      - '5004:80'
+    depends_on:
+      - hospital-reader-gateway
+    stop_signal: SIGINT
+    hostname: hospital-diagnostics-microservice.local
+    networks:
+      - external-network
+  
+  nurse-microservice:
+    build: ../nurse-microservice
+    ports:
+      - '5004:80'
+    depends_on:
+      - hospital-reader-gateway
+    stop_signal: SIGINT
+    hostname: hospital-nurse-microservice.local
+    networks:
+      - external-network
+  
+  exam-microservice:
+    build: ../exam-microservice
+    ports:
+      - '5004:80'
+    depends_on:
+      - hospital-reader-gateway
+    stop_signal: SIGINT
+    hostname: hospital-exam-microservice.local
     networks:
       - external-network
 
