@@ -3,7 +3,7 @@ from flask import Flask, request, send_from_directory
 import requests, os, socket
 from constants import GATEWAY_FQDN
 app = Flask(__name__)
-random.seed(5991)
+random.seed(400)
 
 @app.route('/dashboard/<path:path>', methods=['GET'])
 def dashboard(path):
