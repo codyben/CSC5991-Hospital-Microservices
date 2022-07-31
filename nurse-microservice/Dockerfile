@@ -1,4 +1,4 @@
-FROM ghcr.io/codyben/csc5991-hospital-microservices/hospital-base:taza
+FROM ghcr.io/codyben/csc5991-hospital-microservices/hospital-base:develop-cody
 
 ENV SERVICE_NAME nurse-microservice
 WORKDIR /app
