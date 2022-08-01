@@ -1,4 +1,4 @@
-FROM ghcr.io/codyben/csc5991-hospital-microservices/hospital-base:develop-cody
+FROM ghcr.io/codyben/csc5991-hospital-microservices/hospital-base:main
 
 ENV SERVICE_NAME diagnostics-reader
 WORKDIR /app

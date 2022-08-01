@@ -1,10 +1,10 @@
 FROM ghcr.io/codyben/csc5991-hospital-microservices/hospital-base:main
 
-ENV SERVICE_NAME nurse-reader
+ENV SERVICE_NAME billingmicroservice
 WORKDIR /app
 
 ADD main.py .
-ADD Database.py .
+COPY dashboard/* ./dashboard/
 
 EXPOSE 80
 
