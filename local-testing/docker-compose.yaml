@@ -242,7 +242,16 @@ services:
     hostname: hospital-medicine-microservice.local
     networks:
       - external-network
-
+  billing-microservice:
+    build: ../billing-microservice
+    ports:
+      - '5004:80'
+    depends_on:
+      - hospital-reader-gateway
+    stop_signal: SIGINT
+    hostname: hospital-billing-microservice.local
+    networks:
+      - external-network
 networks:
   reader-network:
     name: reader-net
