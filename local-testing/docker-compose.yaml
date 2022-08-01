@@ -220,37 +220,6 @@ services:
     hostname: hospital-nurse-microservice.local
     networks:
       - external-network
-
-  roommicroservice:
-    build: ../roommicroservice
-    ports:
-      - '5001:80'
-    depends_on:
-      - hospital-reader-gateway
-    stop_signal: SIGINT
-    hostname: hospital-roommicroservice.local
-    networks:
-      - external-network
-  medicinemicroservice:
-    build: ../medicinemicroservice
-    ports:
-      - '5001:80'
-    depends_on:
-      - hospital-reader-gateway
-    stop_signal: SIGINT
-    hostname: hospital-medicinemicroservice.local
-    networks:
-      - external-network
-  billingmicroservice:
-    build: ../billingmicroservice
-    ports:
-      - '5001:80'
-    depends_on:
-      - hospital-reader-gateway
-    stop_signal: SIGINT
-    hostname: hospital-billingmicroservice.local
-    networks:
-      - external-network
   
   exam-microservice:
     build: ../exam-microservice
