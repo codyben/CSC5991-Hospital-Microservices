@@ -27,5 +27,4 @@ mycursor.execute("CREATE TABLE cleaningStaff(StaffName VARCHAR(50), StaffDaysAva
 
 mycursor.execute("CREATE TABLE BillingInfo(PATIENTname VARCHAR(50), MoneyOwed int UNSIGNED, MoneyDueBy VARCHAR(50))")
 
-
 mycursor.execute("CREATE TABLE Docter(DOCname VARCHAR(50), DOCphone bigint UNSIGNED, DOCfield VARCHAR(50),  DOCdaysPresent VARCHAR(50), DOCtimePresent VARCHAR(50) )")
