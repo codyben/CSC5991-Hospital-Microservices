@@ -46,7 +46,7 @@ def notify_gateway():
 @app.route('/nurse', methods=['GET'])
 def get_all_nurses():
     def query(cursor):
-        cursor.execute("SELECT * FROM Docter")
+        cursor.execute("SELECT * FROM Nurse")
     result = database.transaction(query)
     return {
         "success": True,
@@ -57,7 +57,7 @@ def get_all_nurses():
 @app.route('/nurse/<nurse_name>', methods=['GET'])
 def get_nurses_by_name(nurse_name:str):
     def query(cursor):
-        cursor.execute("SELECT * FROM Docter WHERE DOCname = %s", (nurse_name,))
+        cursor.execute("SELECT * FROM Nurses WHERE NURSEname = %s", (nurse_name,))
     result = database.transaction(query)
     parsed = [database.parse(r) for r in result]
     if parsed:
