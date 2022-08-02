@@ -12,7 +12,7 @@ def dashboard(path):
 @app.route('/api', methods=['GET'])
 def api():
     # not ideal, but postback so we can use Docker's internal networking easier.
-    return requests.get(f"http://{GATEWAY_FQDN}/proxy/diagnostics-reader/diagnostic").json()
+    return requests.get(f"http://{GATEWAY_FQDN}/proxy/diagnostics-reader/diagnostics").json()
 
 @app.route('/api/<name>', methods=['GET'])
 def amulance_api(name:str):

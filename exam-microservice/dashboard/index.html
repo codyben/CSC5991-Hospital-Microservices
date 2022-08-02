@@ -21,7 +21,8 @@
 <script>
 	"use strict";
 	function make_row(result) {
-		const {name, issues, department} = result;
+		const {patient_name, issues, department} = result;
+		const name = patient_name;
 		return `<div class="exam">
 			<p class="exam-name">Name: ${name}</p>
 			<p class="exam-phone">Issues: ${issues}</p>
