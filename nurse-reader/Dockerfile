@@ -5,6 +5,7 @@ WORKDIR /app
 
 ADD main.py .
 ADD Database.py .
+ADD NurseModel.py .
 
 EXPOSE 80
 
