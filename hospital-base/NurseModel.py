@@ -13,3 +13,4 @@ class NurseModel:
             "phone": self.phone,
             "times": self.times
         }
+
