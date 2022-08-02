@@ -21,11 +21,11 @@
 <script>
 	"use strict";
 	function make_patient_row(Meds) {
-		const  {patient_name, medicine_name, dosage} = Meds;
+		const  {patient_name, issues, department} = Meds;
 		return `<div class="Meds">
 			<p class="Meds-name">NAME: ${patient_name}</p>
-			<p class="meds-medsName">Medicine Name: ${medicine_name}</p>
-			<p class="meds-dose">Dosage in Oz: ${dosage}</p>
+			<p class="meds-medsName">Medicine Name: ${issues}</p>
+			<p class="meds-dose">Dosage in Oz: ${department}</p>
 			<a href="/api/${patient_name}">Integration Permlink</a>
 			</div>`;
 	}

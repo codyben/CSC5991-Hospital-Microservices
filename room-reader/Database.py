@@ -37,6 +37,6 @@ class Database:
         name, room, dept = row
         return RoomModel(
             name=name,
-            room_number=room,
+            number=room,
             department=dept
         ).serialize()

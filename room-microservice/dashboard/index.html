@@ -42,7 +42,7 @@
 		.then( (Rooms) => {
 			document.getElementById("Rooms").innerHTML = "";
 			Rooms.forEach( (patient) => {
-				document.getElementById("Rooms").innerHTML += make_patient_row(Patient_Rooms);
+				document.getElementById("Rooms").innerHTML += make_patient_row(patient);
 			})
 			document.getElementById("generated").innerHTML = new Date().toLocaleString();
 			document.getElementById("total").innerHTML = `${Rooms.length} results returned`;
