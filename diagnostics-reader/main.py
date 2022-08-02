@@ -46,7 +46,7 @@ def notify_gateway():
 @app.route('/diagnostics', methods=['GET'])
 def get_all_diagnostics():
     def query(cursor):
-        cursor.execute("SELECT * FROM Patien_DiagnosticsResult")
+        cursor.execute("SELECT * FROM Patien_DAIGNOSTICS")
     result = database.transaction(query)
     return {
         "success": True,
@@ -57,7 +57,7 @@ def get_all_diagnostics():
 @app.route('/diagnostic/<patient_name>', methods=['GET'])
 def get_diagnostic_by_patient(patient_name:str):
     def query(cursor):
-        cursor.execute("SELECT * FROM Patien_DiagnosticResult WHERE PATIENTname = %s", (patient_name,))
+        cursor.execute("SELECT * FROM Patien_DAIGNOSTICS WHERE PATIENTname = %s", (patient_name,))
     result = database.transaction(query)
     parsed = database.parse(result)
     if parsed:
