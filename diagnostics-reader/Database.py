@@ -1,6 +1,6 @@
 import time
 import mysql.connector
-from RoomModel import RoomModel
+from DiagnosticsModel import DiagnosticsModel
 from constants import MYSQL_CONNECT_OPTIONS
 
 class Database:
@@ -18,6 +18,7 @@ class Database:
                     time.sleep(2)
         except:
             print("Failed to init db")
+    
     def transaction(self, query) -> tuple:
         cursor = self.db.cursor()
         try:
@@ -34,9 +35,9 @@ class Database:
     def parse(self, row):
         if not row:
             return None
-        name, room, dept = row
-        return RoomModel(
+        name, medical_issues, department = row
+        return DiagnosticsModel(
             name=name,
-            number=room,
-            department=dept
+            issues=medical_issues,
+            department=department
         ).serialize()

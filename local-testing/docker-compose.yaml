@@ -53,6 +53,19 @@ services:
       - reader-network
       - database-network
 
+  nurse-reader:
+    build: ../nurse-reader
+    ports:
+      - '80:80'
+    depends_on:
+      - hospital-reader-gateway
+      - hospital-db
+    stop_signal: SIGINT
+    hostname: hospital-nurse-reader.local
+    networks:
+      - reader-network
+      - database-network
+
   exam-reader:
     build: ../exam-reader
     ports:
@@ -152,7 +165,107 @@ services:
     hostname: hospital-doctor-microservice.local
     networks:
       - external-network
+      
+  cleaning-microservice:
+    build: ../cleaning-staff-microservice
+    ports:
+      - '5003:80'
+    depends_on:
+      - hospital-reader-gateway
+    stop_signal: SIGINT
+    hostname: hospital-cleaning-microservice.local
+    networks:
+      - external-network
 
+  ambulance-microservice:
+    build: ../ambulance-microservice
+    ports:
+      - '5004:80'
+    depends_on:
+      - hospital-reader-gateway
+    stop_signal: SIGINT
+    hostname: hospital-ambulance-microservice.local
+    networks:
+      - external-network
+
+  diagnostics-reader:
+    build: ../diagnostics-reader
+    ports:
+      - '80:80'
+    depends_on:
+      - hospital-reader-gateway
+      - hospital-db
+    stop_signal: SIGINT
+    hostname: hospital-diagnostics-reader.local
+    networks:
+      - reader-network
+      - database-network
+
+  diagnostics-microservice:
+    build: ../diagnostics-microservice
+    ports:
+      - '5005:80'
+    depends_on:
+      - hospital-reader-gateway
+    stop_signal: SIGINT
+    hostname: hospital-diagnostics-microservice.local
+    networks:
+      - external-network
+  
+  nurse-microservice:
+    build: ../nurse-microservice
+    ports:
+      - '5006:80'
+    depends_on:
+      - hospital-reader-gateway
+    stop_signal: SIGINT
+    hostname: hospital-nurse-microservice.local
+    networks:
+      - external-network
+  
+  exam-microservice:
+    build: ../exam-microservice
+    ports:
+      - '5007:80'
+    depends_on:
+      - hospital-reader-gateway
+    stop_signal: SIGINT
+    hostname: hospital-exam-microservice.local
+    networks:
+      - external-network
+
+  medicine-microservice:
+    build: ../medicine-microservice
+    ports:
+      - '5008:80'
+    depends_on:
+      - hospital-reader-gateway
+    stop_signal: SIGINT
+    hostname: hospital-medicine-microservice.local
+    networks:
+      - external-network
+
+  room-microservice:
+    build: ../room-microservice
+    ports:
+      - '5009:80'
+    depends_on:
+      - hospital-reader-gateway
+    stop_signal: SIGINT
+    hostname: hospital-room-microservice.local
+    networks:
+      - external-network
+
+  billing-microservice:
+    build: ../billing-microservice
+    ports:
+      - '5010:80'
+    depends_on:
+      - hospital-reader-gateway
+    stop_signal: SIGINT
+    hostname: hospital-billing-microservice.local
+    networks:
+      - external-network
 networks:
   reader-network:
     name: reader-net

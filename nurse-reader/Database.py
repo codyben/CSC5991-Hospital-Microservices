@@ -1,6 +1,6 @@
 import time
 import mysql.connector
-from RoomModel import RoomModel
+from NurseModel import NurseModel
 from constants import MYSQL_CONNECT_OPTIONS
 
 class Database:
@@ -23,7 +23,7 @@ class Database:
         try:
             query(cursor)
         except Exception as e:
-            print(e)
+            print(e, flush=True)
             # raise an exception
             cursor.close()
             return ()
@@ -34,9 +34,11 @@ class Database:
     def parse(self, row):
         if not row:
             return None
-        name, room, dept = row
-        return RoomModel(
+        name, phone, field, present, times = row
+        return NurseModel(
             name=name,
-            number=room,
-            department=dept
+            phone=phone,
+            field=field,
+            times=times,
+            present=present
         ).serialize()

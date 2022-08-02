@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="/dashboard/main.css" type="text/css">
+	<title>Ambulance Driver</title>
+</head>
+<body>
+	<h1>Ambulance Driver</h1>
+	<div class="stats">
+		<p id="total"></p>
+		<p id="generated"></p>
+		<p id="error">RESULTS OK</p>
+		<a href="#" onclick="loader()">REFRESH</a>
+	</div>
+	<div class="container" id="Ambulance">
+
+	</div>
+</body>
+<script>
+	"use strict";
+	function make_row(result) {
+		const {name, ambulance_number, days_available,  times_available} = result;
+		return `<div class="amb">
+			<p class="amb-name">Driver: ${name}</p>
+			<p class="amb-phone">Ambulance Number: ${ambulance_number}</p>
+			<p class="amb-avail">Days: ${days_available}</p>
+			<p class="amb-days">Times: ${times_available}</p>
+			<a href="/api/${name}">Integration Permlink</a>
+			</div>`;
+	}
+
+	function loader() {
+		fetch("/api").then( (r) => {
+			if(r.ok) return r.json()
+		})
+		.then( response => {
+			if(!response.success) document.getElementById("error").innerHTML = "ERROR";
+			return response;
+		})
+		.then(response => response.data.data)
+		.then( (Ambulance) => {
+			document.getElementById("Ambulance").innerHTML = "";
+			Ambulance.forEach( (amb) => {
+				document.getElementById("Ambulance").innerHTML += make_row(amb);
+			})
+			document.getElementById("generated").innerHTML = new Date().toLocaleString();
+			document.getElementById("total").innerHTML = `${Ambulance.length} results returned`;
+		})
+	};
+
+	window.onload = loader;
+</script>
+</script>
+</html>

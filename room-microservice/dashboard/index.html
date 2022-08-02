@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="/dashboard/main.css" type="text/css">
+	<title>Patient Rooms</title>
+</head>
+<body>
+	<h1>Patient Rooms</h1>
+	<div class="stats">
+		<p id="total"></p>
+		<p id="generated"></p>
+		<p id="error">RESULTS OK</p>
+		<a href="#" onclick="loader()">REFRESH</a>
+	</div>
+	<div class="container" id="Rooms">
+
+	</div>
+</body>
+<script>
+	"use strict";
+	function make_patient_row(Patient_Rooms) {
+		const  {name, room_number, department} = Patient_Rooms;
+		return `<div class="Patient_Rooms">
+			<p class="Patient_Rooms-name">NAME: ${name}</p>
+			<p class="Patient_Rooms-Ammount">Room Number: ${room_number}</p>
+			<p class="Patient_Rooms-dueby">Due by: ${department}</p>
+			<a href="/api/${name}">Integration Permlink</a>
+			</div>`;
+	}
+
+	function loader() {
+		fetch("/api").then( (r) => {
+			if(r.ok) return r.json()
+		})
+		.then( response => {
+			if(!response.success) document.getElementById("error").innerHTML = "ERROR";
+			return response;
+		})
+		.then(response => response.data.data)
+		.then( (Rooms) => {
+			document.getElementById("Rooms").innerHTML = "";
+			Rooms.forEach( (patient) => {
+				document.getElementById("Rooms").innerHTML += make_patient_row(patient);
+			})
+			document.getElementById("generated").innerHTML = new Date().toLocaleString();
+			document.getElementById("total").innerHTML = `${Rooms.length} results returned`;
+		})
+	};
+
+	window.onload = loader;
+</script>
+</script>

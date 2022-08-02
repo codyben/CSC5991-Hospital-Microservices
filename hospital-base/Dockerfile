@@ -11,6 +11,7 @@ ADD CleaningStaffModel.py .
 ADD ExamModel.py .
 ADD RoomModel.py .
 ADD DoctorModel.py .
+ADD DiagnosticsModel.py .
 ADD constants.py .
 
 
