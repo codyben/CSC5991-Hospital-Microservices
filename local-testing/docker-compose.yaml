@@ -52,6 +52,7 @@ services:
     networks:
       - reader-network
       - database-network
+
   nurse-reader:
     build: ../nurse-reader
     ports:
@@ -64,6 +65,7 @@ services:
     networks:
       - reader-network
       - database-network
+
   exam-reader:
     build: ../exam-reader
     ports:
@@ -163,7 +165,7 @@ services:
     hostname: hospital-doctor-microservice.local
     networks:
       - external-network
-
+      
   cleaning-microservice:
     build: ../cleaning-staff-microservice
     ports:

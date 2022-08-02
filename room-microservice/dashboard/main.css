@@ -1,3 +1,16 @@
+<<<<<<< HEAD
+.container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.Patient_Rooms {
+    width: 25%;
+    background-color: #b5b5b52e;
+    margin: 5px;
+=======
 .container {
     display: flex;
     flex-direction: row;
@@ -9,4 +22,5 @@
     width: 25%;
     background-color: #8fb9742e;
     margin: 5px;
+>>>>>>> 930c5a0d640a070e07f9035a3c7c35a10805c46d
 }
